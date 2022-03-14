@@ -1,3 +1,7 @@
+# Jimmy's Compound Interest Calculator
+After running the file go ahead and fill out the form before clicking submit to see what your loan's estimated final 
+value will be.
+
 # Getting Started with Create React FormContainer
 
 This project was bootstrapped with [Create React FormContainer](https://github.com/facebook/create-react-app).
