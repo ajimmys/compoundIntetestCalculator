@@ -1,0 +1,30 @@
+form{
+  margin-left: 5vw;
+  display: flex;
+  flex-direction: column;
+}
+
+input{
+  width: 15vw;
+  padding: 10px;
+}
+
+button {
+  width: 10vw;
+  margin: 10px
+}
+
+.radioButtonList {
+  display: flex;
+  flex-direction: row;
+}
+
+label {
+  width: 5vw;
+  margin-right: 3vw;
+  font-size: 12px;
+}
+
+.currSign:before {
+  content: '$';
+}
