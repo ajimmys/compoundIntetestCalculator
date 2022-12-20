@@ -1,14 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import FormContainer from './Containers/FormContainer';
-import reportWebVitals from './reportWebVitals';
+import './index.css';
 import HeaderPresentation from "./Presentations/HeaderPresentation";
+import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
       <HeaderPresentation />
-      <FormContainer />
+      <div className='formDiv'>
+        <FormContainer />
+      </div>
   </React.StrictMode>,
   document.getElementById('root')
 );

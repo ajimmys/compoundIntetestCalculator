@@ -1,7 +1,7 @@
-import '../Style/App.css';
 import React from 'react';
-import CurrencyFormat from 'react-currency-format'
+import CurrencyFormat from 'react-currency-format';
 import RadioButtonList from '../Presentations/RadioButtonList';
+import '../Style/App.css';
 
 class FormContainer extends React.Component{
     constructor(props) {
