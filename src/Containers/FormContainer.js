@@ -1,7 +1,7 @@
 import React from 'react';
 import CurrencyFormat from 'react-currency-format';
 import RadioButtonList from '../Presentations/RadioButtonList';
-import '../Style/App.css';
+import '../Styles/CSS/App.css';
 
 class FormContainer extends React.Component{
     constructor(props) {
@@ -14,6 +14,7 @@ class FormContainer extends React.Component{
             years: '',
             payments: '',
             numberRegularPayments: 12,
+            amountAdded: 0,
             total: 0,
         }
 
@@ -47,16 +48,25 @@ class FormContainer extends React.Component{
             regularPayments = 0 :
             regularPayments = parseFloat(this.state.payments.replace(/[$,]/g, ''))
         let rate = parseFloat(this.state.interestRate.replace('%', ''))/100
-        let periods = this.state.compoundFrequency
+        let compoundFrequency = this.state.compoundFrequency
         let years = this.state.years
-        let numberRegularPayments = this.state.numberRegularPayments / years
+        let numberAnnualPayments = this.state.numberRegularPayments === 52 ? 4.333333 : this.state.numberRegularPayments === 365 ? 30.416667 : this.state.numberRegularPayments
 
-        let valueA = (1 + (rate/periods))**(periods*years)
-        let contributionsCompound = regularPayments * numberRegularPayments *
-            (((1 + rate/periods)**(periods*years)-1)/(rate/periods))
-        let flatCompound = principal * valueA
+        // convert periodic payments into a single annual ammount added each year 
+        let PMT = numberAnnualPayments * regularPayments
+
+        //Cleared for standard cases
+        let flatCompound = principal*((1 + (rate/compoundFrequency))**(compoundFrequency*years))
+
+
+        // TODO: Need to figure out why this doesn't work for Quarterly, Monthly and Daily compounding
+        let contributionsCompound = PMT*((((1+(rate/compoundFrequency))**(compoundFrequency*years))-1)/(rate/compoundFrequency))
+        console.log(contributionsCompound)
+        
         let newTotal = flatCompound + contributionsCompound
+
         this.setState({total : newTotal})
+        this.setState({amountAdded: PMT * years})
     }
 
     render() {
@@ -81,7 +91,7 @@ class FormContainer extends React.Component{
                 <p>Compound Frequency:</p>
                 <RadioButtonList
                     attributeName="compoundFrequency"
-                    buttonValues={[["1", "Annual"], ["4", "Quarterly"], ["12", "Monthly"], ["365", "Daily"]]}
+                    buttonValues={[["1", "Annualy"], ["4", "Quarterly"], ["12", "Monthly"], ["365", "Daily"]]}
                     attribute={this.state.compoundFrequency}
                     changeFunction={this.handleChange}
                 />
@@ -98,7 +108,7 @@ class FormContainer extends React.Component{
                 <p>Contribution Frequency</p>
                 <RadioButtonList
                     attributeName="numberRegularPayments"
-                    buttonValues={[["365", "Daily"], ["52", "Weekly"], ["12", "Monthly"]]}
+                    buttonValues={[["1", "Annualy"], ["12", "Monthly"], ["52.17857 ", "Weekly"],["365", "Daily"]]}
                     attribute={this.state.numberRegularPayments}
                     changeFunction={this.handleChange}
                 />
@@ -115,6 +125,18 @@ class FormContainer extends React.Component{
                     Submit
                 </button>
 
+
+
+                {this.state.amountAdded > 0 ? 
+                    <CurrencyFormat
+                        value={this.state.amountAdded}
+                        displayType={"text"}
+                        decimalScale={2}
+                        thousandSeparator={true}
+                        prefix={"Amount Added: $"}
+                    /> : 
+                    <p> </p>
+                }
                 {this.state.total > 0 ?
                     <CurrencyFormat
                         value={this.state.total}
