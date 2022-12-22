@@ -1,10 +1,9 @@
 import CurrencyFormat from "react-currency-format";
 
 export default function CalculationOutput(props) {
-    console.log(props.amountAdded)
     return (
             <div >
-            { props.total > 0 ?
+            { (props.total > 0 && props.principalAmount > 0) ?
                 <div className="results">
                     <CurrencyFormat 
                         value={props.principalAmount}

@@ -1,30 +1,27 @@
-form {
-  margin-left: 5vw;
-  display: flex;
-  flex-direction: column;
-}
-
 .calculatorBody {
   display: flex;
 }
 
-input {
-  width: 15vw;
+form {
+  padding: 1vw;
+  margin-left: 2vw;
+  display: flex;
+  flex-direction: column;
+  width: 50vw;
+}
+form input {
   padding: 10px;
 }
-
-button {
+form button {
   width: 10vw;
   margin: 10px;
 }
 
 .radioButtonList {
   display: flex;
-  justify-content: flex-start;
-  width: 35vw;
 }
 .radioButtonList div {
-  width: 7vw;
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -33,12 +30,14 @@ button {
   padding: 0;
 }
 
-.currSign:before {
-  content: "$";
-}
-
 .results {
+  width: 40vw;
   display: flex;
   flex-direction: column;
   border: 1px solid black;
+  padding: 1vw;
+  margin: 2vw;
+  background: lightgrey;
+  font-size: 2em;
+  border-radius: 10px;
 }/*# sourceMappingURL=App.css.map */

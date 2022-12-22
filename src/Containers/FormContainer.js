@@ -9,7 +9,7 @@ export default function FormContainer(props) {
             <form onSubmit={props.handleSubmit}>
                 <p>Principal Amount:</p>
                 <CurrencyFormat
-                    value={props.principalAmount}
+                    value={props.principalAmount > 0 ? props.principalAmount : ''}
                     thousandSeparator={true}
                     prefix="$"
                     placeholder="$10,000"
@@ -29,7 +29,7 @@ export default function FormContainer(props) {
                 <p>Interest Rate:</p>
                 <CurrencyFormat
                     name="interestRate"
-                    value={props.interestRate}
+                    value={props.interestRate > 0 ? props.interestRate : ''}
                     suffix=" %"
                     placeholder="2%"
                     onValueChange={(values) => {
@@ -54,7 +54,7 @@ export default function FormContainer(props) {
 
                 <p>Periodic Contributions:</p>
                 <CurrencyFormat
-                    value={props.payments}
+                    value={props.payments > 0 ? props.payments : ''}
                     thousandSeparator={true}
                     prefix="$"
                     placeholder="$100"
